@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <locale.h>
 #define funcaoMenu
-#define ex6
+#define ex3
 
 #ifdef funcaoMenu
 int funcMenu() {
     int start;
     do {
+        system("cls");
         printf("MENU\n");
         printf("0-Sair o programa\n");
         printf("1-Iniciar do programa\n");
@@ -43,7 +44,7 @@ void receberDados(struct dados *p) {
     printf("Digite o double:\n");
     scanf("%lf", &p->e);
     printf("Digite o unsigned char:\n");
-    scanf("%c", &p->f);
+    scanf(" %c", &p->f);
     getchar();
     printf("Digite o unsigned int:\n");
     scanf("%u", &p->g);
@@ -77,11 +78,14 @@ main()
     struct dados *p;
     p = &jockey;
     while (funcMenu() != 0 ) {
+        system("cls");
         getchar();
         receberDados(p);
         imprimir(p);
+        system("pause");
         printf("\n");
     }
+    printf("Saindo do programa!\n");
 }
 #endif //ex1
 
@@ -118,6 +122,7 @@ main() {
     char string1[10], string2[10], *p1, *p2;
     p1 = &string1[0], p2 = &string2[0];
     while (funcMenu() != 0) {
+        system("cls");
         recebeString(p1, p2);
         if (comparar(p1,p2) == 1) {
             printf("IGUAIS\n");
@@ -125,12 +130,29 @@ main() {
         else {
             printf("DIFERENTES\n");
         }
-        printf("\n");
+        system("pause");
     }
+    printf("Saindo do programa!\n");
 }
 #endif // ex2
 
 #ifdef ex3
+int soma(int *pn1, int *pn2) {
+    int resultado = *pn1 + *pn2;
+    return(resultado);
+}
+int sub(int *pn1, int *pn2) {
+    int resultado = *pn1 - *pn2;
+    return(resultado);
+}
+int mult(int *pn1, int *pn2) {
+    int resultado = *pn1 * *pn2;
+    return(resultado);
+}
+int div(int *pn1, int *pn2) {
+    int resultado = *pn1 / *pn2;
+    return(resultado);
+}
 main() {
     /*3 - Escreva um programa que receba n valores via teclado e receba tambem a
     operacao a ser executada. Quando for digitado "=" o programa deve mostrar
@@ -138,42 +160,41 @@ main() {
     de dados devem ser funcoes que recebe os valores usando ponteiros.
     As variaveis sao LOCAIS na funcao main().*/
     setlocale(LC_ALL, "");
-    int i, resultado = 0, num1, num2;
-    char opcao;
-    while (funcMenu() != 0) {
-        for (i = 0; opcao != '='; i++) {
-            printf("\n");
-            printf("Digite a operação:\n1 - Soma\n2 - Subtração\n3 - Multiplicação\n4 - Divisão\n'=' - Sair\n");
-            scanf(" %c", &opcao);
-            if (opcao == '=') {
-                printf("O acumulado dos valores é: %d\n", resultado);
-                break;
-            }
-            else {
-                printf("Digite o primeiro número:\n");
-                scanf("%d", &num1);
-                printf("Digite o segundo número:\n");
-                scanf("%d", &num2);
-                if (opcao == '1') {
-                num1 = num1 + num2;
-                resultado = resultado + num1;
-                }
-                if (opcao == '2') {
-                num1 = num1 - num2;
-                resultado = resultado + num1;
-                }
-                if (opcao == '3') {
-                num1 = num1 * num2;
-                resultado = resultado + num1;
-                }
-                if (opcao == '4') {
-                num1 = num1 / num2;
-                resultado = resultado + num1;
-                }
-            }
+    int i, acumulado = 0, num1, num2, *pn1, *pn2;
+    pn1 = &num1;
+    pn2 = &num2;
+    int opcao;
+    do {
+        system("cls");
+        printf("MENU\n1-Soma\n2-Subtração\n3-Multiplicação\n4-Divisão\n5-Saída\n");
+        scanf("%d", &opcao);
+        if (opcao < 1 || opcao > 5) {
+            printf("Digite uma opção válida!\n");
         }
-        printf("\n");
-    }
+        switch(opcao) {
+        case 1:
+            printf("Digite o primeiro e segundo número:\n");
+            scanf("%d %d", pn1, pn2);
+            acumulado = acumulado + soma(pn1, pn2);
+            break;
+        case 2:
+            printf("Digite o primeiro (este será o minuendo) e segundo número (este será o subtraendo):\n");
+            scanf("%d %d", pn1, pn2);
+            acumulado = acumulado + sub(pn1, pn2);
+            break;
+        case 3:
+            printf("Digite o primeiro e segundo número:\n");
+            scanf("%d %d", pn1, pn2);
+            acumulado = acumulado + mult(pn1, pn2);
+            break;
+        case 4:
+            printf("Digite o primeiro (este será o dividendo) e segundo número (este será o divisor):\n");
+            scanf("%d %d", pn1, pn2);
+            acumulado = acumulado + div(pn1, pn2);
+            break;
+        }
+    } while (opcao != 5);
+    printf("O valor acumulado é %d\n", acumulado);
 }
 #endif // ex3
 
@@ -202,6 +223,7 @@ main() {
     pl = &letra;
     pv = &vetor[0];
     while (funcMenu() != 0) {
+        system("cls");
         printf("Digite a letra a ser pesquisada:\n");
         scanf(" %c", &letra);
         if (pesquisar(pl, pv) == 1) {
@@ -210,6 +232,7 @@ main() {
         else {
             printf("A letra não foi encontrada!\n");
         }
+        system("pause");
         printf("\n");
     }
     printf("Finalizando o programa...\n");
@@ -241,6 +264,7 @@ void imprimir(struct dados *p) {
     for (i = 0; i < 4; i++) {
         printf("Nome - %s; Índice %d\n", (p+i)->nome, i);
         printf("Endereço - %s\nCidade - %s\nEstado - %s\nCEP - %s\n", (p+i)->end, (p+i)->cidade, (p+i)->estado, (p+i)->cep);
+        printf("\n");
     }
 }
 main() {
@@ -266,6 +290,8 @@ main() {
             break;
         case 2:
             imprimir(p);
+            system("pause");
+            system("cls");
             break;
         }
     } while (opcao != 3);
@@ -299,6 +325,7 @@ void imprimir(struct dados *p) {
         if((p+i)->nome[0] != '*') {
             printf("Nome - %s; Índice %d\n", (p+i)->nome, i);
         printf("Endereço - %s\nCidade - %s\nEstado - %s\nCEP - %s\n", (p+i)->end, (p+i)->cidade, (p+i)->estado, (p+i)->cep);
+        printf("\n");
         }
     }
 }
@@ -314,9 +341,15 @@ int procurar(struct dados *p) {
             }
         }
         if(nome[j] == '\0' && (p+i)->nome[j] == '\0') {
+            printf("Registro encontrado!\n");
+            printf("Nome - %s; Índice %d\n", (p+i)->nome, i);
+            printf("Endereço - %s\nCidade - %s\nEstado - %s\nCEP - %s\n", (p+i)->end, (p+i)->cidade, (p+i)->estado, (p+i)->cep);
             resultado = i;
             break;
         }
+    }
+    if(resultado == -1) {
+        printf("Registro não encontrado!\n");
     }
     return (resultado);
 }
@@ -336,9 +369,6 @@ void alterar(struct dados *p) {
         scanf(" %s", (p+alterar)->cep);
         system("CLS");
     }
-    else {
-        printf("Registro não encontrado!\n");
-    }
 }
 void excluir(struct dados *p) {
     int excluir = procurar(p);
@@ -355,6 +385,7 @@ main() {
     struct dados infos[4], *p;
     p = &infos[0];
     do {
+        system("cls");
         printf("MENU\n1-Receber registros\n2-Imprimir registros\n3-Procurar registro\n4-Alterar registro\n5-Excluir registro\n6-Sair\n");
         scanf("%d", &opcao);
         getchar();
@@ -365,15 +396,19 @@ main() {
             break;
         case 2:
             imprimir(p);
+            system("pause");
             break;
         case 3:
             procurar(p);
+            system("pause");
             break;
         case 4:
             alterar(p);
+            system("pause");
             break;
         case 5:
             excluir(p);
+            system("pause");
             break;
         }
     } while (opcao != 6);

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <locale.h>
-#define ex6
+#define ex3
 #define funcaoMenu
 
 #ifdef funcaoMenu
@@ -110,8 +110,7 @@ main()
             break;
            }
            *pmedia = *pnum + *pmedia;
-           *pi = *pi + 1; //como fazer ponteiro++?
-           printf("%d\n%d\n%d\n", *pmedia, *pnum, *pi);
+           *pi = *pi + 1;
         }
         *pmedia = *pmedia / *pi;
         printf("A média dos números é: %d\n", *pmedia);

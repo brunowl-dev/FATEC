@@ -5,7 +5,6 @@
 #define ex4
 
 #ifdef funcaoMenu
-//\n e ||
 int funcMenu() {
     int start;
     do {
@@ -79,7 +78,7 @@ struct contato{
 };
 void carrega_dados(struct contato *p) {
     int i;
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) { //Usar um fread só
         fread((p+i)->nome, sizeof((p+i)->nome), 1, pa);
         fread((p+i)->tel, sizeof((p+i)->tel), 1, pa);
         fread(&(p+i)->dia, sizeof((p+i)->dia), 1, pa);
@@ -275,9 +274,7 @@ struct dados {
 void incluir(struct dados *p) {
     getchar();
     system("cls");
-    if((pa = fopen("ex3.txt","a"))==NULL) {
-        pa = fopen("ex3.txt", "w");
-    }
+    pa = fopen("ex3.txt", "a");
     printf("Digite o nome:\n");
     gets(p->nome);
     printf("Digite o e-mail:\n");
@@ -320,7 +317,7 @@ int pesquisar(struct dados *p) {
     }
     else {
         for(j = 0; fread(p, sizeof(struct dados), 1, pa) != 0; j++) {
-            for(i = 0; i < 10; i++) {
+            for(i = 0; nome[i] != '\0'; i++) {
                 if (nome[i] != p->nome[i]) {
                     break;
                 }
@@ -530,7 +527,7 @@ void listar_naodisp(struct mercadorias *p) {
     fclose(pa);
 }
 void alterar_quant(struct mercadorias *p) {
-    int alterar;
+    int alterar, es;
     alterar = pesquisar(p);
     system("cls");
     if (alterar == -1) {
@@ -541,9 +538,10 @@ void alterar_quant(struct mercadorias *p) {
         alterar = alterar * sizeof(struct mercadorias);
         fseek(pa, alterar, 0);
         fread(p, sizeof(struct mercadorias), 1, pa);
-        printf("Digite a quantidade do novo produto:\n");
-        scanf("%d", &p->quant);
-        fseek(pa, alterar, 0);
+        printf("Digite a entrada ou saída do novo produto:\n");
+        scanf("%d", &es);
+        p->quant = p->quant + es;
+        fseek(pa, -sizeof(struct mercadorias), 1);
         fwrite(p, sizeof(struct mercadorias), 1, pa);
         fclose(pa);
         printf("Dados alterados com sucesso!\n");
