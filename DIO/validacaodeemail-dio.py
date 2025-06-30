@@ -11,4 +11,4 @@ if (email[0] == "@") or (email[-1] == "@"):
 if (valido == 0):
     print("E-mail inválido")
 else:
-    print("Email válido")
+    print("E-mail válido")
