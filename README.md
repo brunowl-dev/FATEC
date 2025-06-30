@@ -1,7 +1,7 @@
-# FATEC 🧑‍💻💻
+# Studies 🧑‍💻💻
 
 ## 🇧🇷
-Todas as atividades envolvendo programação eu tive até agora na faculdade, as atividades do primeiro semestre não estão nada organizadas
+Todas as atividades que eu realizei durante meus estudos, tanto da faculdade, quanto de cursos avulsos, como o da DIO
 
 ## 🇺🇸🇬🇧
-All programming-related activies I had so far at college, the first semester stuff aren't organized
+All programming-related activities I had during my studies, in college, and other courses, such as DIO.
